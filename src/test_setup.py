@@ -13,7 +13,7 @@ else:
 
 def run_test():
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
-    sumo_binary = "sumo"
+    sumo_binary = "sumo-gui"
     # TODO: look at xsi:noNamespaceSchemaLocation in the .net.xml and .rou.xml files
     sumo_cmd = [sumo_binary, "-c", "networks/test.sumocfg"]
 
