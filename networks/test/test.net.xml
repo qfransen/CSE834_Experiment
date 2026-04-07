@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<net version="1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/net_file.xsd">
+    <edge id="highway" from="node_start" to="node_end">
+        <lane id="highway_0" index="0" speed="29.06" length="1000" shape="0.00,-3.20 1000,-3.20"/>
+        <lane id="highway_1" index="1" speed="29.06" length="1000" shape="0.00,0.00 1000,0.00"/>
+        <lane id="highway_2" index="2" speed="29.06" length="1000" shape="0.00,3.20 1000,3.20"/>
+    </edge>
+    <junction id="node_start" type="dead_end" x="0.00" y="0.00"/>
+    <junction id="node_end" type="dead_end" x="1000" y="0.00"/>
+</net>
