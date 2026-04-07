@@ -4,6 +4,8 @@ import os
 import sys
 import traci
 
+from utils.data_processor import DataProcessor
+
 # Failsafe to ensure SUMO_HOME is found
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -15,18 +17,34 @@ def run_test():
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
     sumo_binary = "sumo-gui"
     # TODO: look at xsi:noNamespaceSchemaLocation in the .net.xml and .rou.xml files
-    sumo_cmd = [sumo_binary, "-c", "networks/test.sumocfg"]
+    sumo_cmd = [sumo_binary, "-c", "networks/test/test.sumocfg"]
 
     print("Starting SUMO...")
     traci.start(sumo_cmd)
 
     step = 0
-    while step < 100:
+    target_vehicle = "target_car"
+    while step < 1000:
         # print(f"Running simulation step {step}")
         traci.simulationStep()
-        # Example interaction: get the number of vehicles currently in the network
-        veh_count = traci.vehicle.getIDCount()
-        print(f"Step {step}: {veh_count} vehicles active.")
+        processor = DataProcessor()  # our data processor
+
+        active_vehicles = traci.vehicle.getIDList()
+        # stop the target vehicle at step 50
+        if step == 50 and target_vehicle in active_vehicles:
+            print(f"Stopping {target_vehicle} at step {step}")
+            # Use setSpeedMode to override any SUMO checks
+            traci.vehicle.setSpeedMode(target_vehicle, 0)
+            traci.vehicle.setSpeed(target_vehicle, 0)
+
+        # track stats for all other vehicles
+        if step % 10 == 0:
+            summary = processor.get_current_summary(
+                active_vehicles,
+                exclude_vehicles=[target_vehicle]
+            )
+            processor.print_summary(summary, step)
+
         step += 1
 
     traci.close()
