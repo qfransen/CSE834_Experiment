@@ -51,6 +51,12 @@ class DataProcessor:
 
 
     def print_summary(self, summary: dict, step: int):
+        """
+        Prints a summary of the current simulation state to the console
+        :param summary: summary dictionary
+        :param step: current SUMO simulation step
+        :return: None
+        """
         print(f"\nStep {step} Summary:")
         print(f"Vehicle count: {summary['vehicle_count']}")
         if summary['vehicle_count'] > 0:
