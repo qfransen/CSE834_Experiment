@@ -4,6 +4,8 @@ import os
 import sys
 import traci
 
+from utils.data_processor import DataProcessor
+
 # Failsafe to ensure SUMO_HOME is found
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -25,6 +27,7 @@ def run_test():
     while step < 1000:
         # print(f"Running simulation step {step}")
         traci.simulationStep()
+        processor = DataProcessor()  # our data processor
 
         active_vehicles = traci.vehicle.getIDList()
         # stop the target vehicle at step 50
@@ -36,29 +39,12 @@ def run_test():
 
         # track stats for all other vehicles
         if step % 10 == 0:
-            average_speed = 0
-            co2_emissions = 0
-            total = 0
-            for veh_id in active_vehicles:
-                if veh_id != target_vehicle:
-                    speed = traci.vehicle.getSpeed(veh_id)
-                    emit1 = traci.vehicle.getCO2Emission(veh_id)
-                    emit2 = traci.vehicle.getCOEmission(veh_id)
-                    # print(f'{emit1=}, {emit2=}')
+            summary = processor.get_current_summary(
+                active_vehicles,
+                exclude_vehicles=[target_vehicle]
+            )
+            processor.print_summary(summary, step)
 
-                    average_speed += speed
-                    co2_emissions += emit1
-                    total += 1
-            if total > 0:
-                average_speed /= total
-                co2_emissions /= total
-                print(f"Step {step}: "
-                      f"\nAverage speed of other vehicles = {average_speed:.2f} m/s"
-                      f"\nAverage CO2 emissions of other vehicles = {co2_emissions:.2f}")
-
-        # Example interaction: get the number of vehicles currently in the network
-        veh_count = traci.vehicle.getIDCount()
-        # print(f"Step {step}: {veh_count} vehicles active.")
         step += 1
 
     traci.close()
