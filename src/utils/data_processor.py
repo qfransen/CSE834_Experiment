@@ -1,4 +1,8 @@
+import datetime
+
 import traci
+import os
+import pandas as pd
 
 class DataProcessor:
     def __init__(self):
@@ -158,3 +162,31 @@ class DataProcessor:
             print(f"Average speed: {summary['average_speed']:.2f} m/s")
             print(f"Average CO2 emissions: {summary['average_co2']:.2f} g/s")
             print(f"Average trip time: {summary['average_trip_time']:.2f} s")
+
+
+    def save_experiment_data(self, filename: str):
+        """
+        Saves the collected delay data to a file for later analysis
+        :param filename: name of the csv file to save the data to
+        :return: None
+        """
+        # Determine if the output file exists yet
+        if os.path.exists(filename):
+            output_df = pd.read_csv(filename)
+        else:
+            # If not, create a new dataframe with the appropriate columns
+            output_df = pd.DataFrame(columns=["experiment_id", "average_delay", "completed_trips", "ongoing_trips", "cav_percentage"])
+
+        # Add the new data as a new row in the dataframe
+        summary = self.get_total_summary()
+        new_row = {
+            "experiment_id": datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"),
+            "average_delay": summary["average_delay"],
+            "completed_trips": summary["completed_trips"],
+            "ongoing_trips": summary["ongoing_trips"],
+            "cav_percentage": 0.123  # TODO: add this in when we have CAV tracking implemented
+        }
+
+        output_df.loc[len(output_df)] = new_row
+        output_df.to_csv(filename, index=False)
+        print(f"Experiment data saved to {filename}")
