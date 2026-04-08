@@ -21,13 +21,16 @@ def run_test():
 
     print("Starting SUMO...")
     traci.start(sumo_cmd)
+    processor = DataProcessor()  # our data processor
 
     step = 0
     target_vehicle = "target_car"
     while step < 10001:
         # print(f"Running simulation step {step}")
         traci.simulationStep()
-        processor = DataProcessor()  # our data processor
+        # track new and departing vehicles
+        processor.update_delays(exclude_vehicles=[target_vehicle])
+
 
         newly_spawned_vehicles = traci.simulation.getDepartedIDList()
         for veh_id in newly_spawned_vehicles:
@@ -57,9 +60,12 @@ def run_test():
                 active_vehicles,
                 exclude_vehicles=[target_vehicle]
             )
-            processor.print_summary(summary, step)
+            processor.print_step_summary(summary, step)
 
         step += 1
+
+    summary = processor.get_total_summary(exclude_vehicles=[target_vehicle])
+    processor.print_total_summary(summary)
 
     traci.close()
     print("Simulation complete and closed successfully.")
