@@ -24,18 +24,32 @@ def run_test():
 
     step = 0
     target_vehicle = "target_car"
-    while step < 1000:
+    while step < 10001:
         # print(f"Running simulation step {step}")
         traci.simulationStep()
         processor = DataProcessor()  # our data processor
 
+        newly_spawned_vehicles = traci.simulation.getDepartedIDList()
+        for veh_id in newly_spawned_vehicles:
+            if traci.vehicle.getTypeID(veh_id) == "cav_car":
+                # They just spawned, so we update their route immediately
+                traci.vehicle.rerouteTraveltime(veh_id)
+
         active_vehicles = traci.vehicle.getIDList()
         # stop the target vehicle at step 50
-        if step == 50 and target_vehicle in active_vehicles:
+        if step == 51 and target_vehicle in active_vehicles:
             print(f"Stopping {target_vehicle} at step {step}")
             # Use setSpeedMode to override any SUMO checks
             traci.vehicle.setSpeedMode(target_vehicle, 0)
             traci.vehicle.setSpeed(target_vehicle, 0)
+
+            print('Updating edge weights and rerouting CAVs')
+            # artificially increase travel time in middle section to make it look slow
+            traci.edge.adaptTraveltime("highway_middle", 9999)
+            # Force CAVs to reroute based on the new travel time
+            for veh_id in active_vehicles:
+                if traci.vehicle.getTypeID(veh_id) == "cav_car":
+                    traci.vehicle.rerouteTraveltime(veh_id)
 
         # track stats for all other vehicles
         if step % 10 == 0:
