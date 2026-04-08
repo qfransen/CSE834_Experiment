@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-04-07T23:28:02.814108-05:00 by Eclipse SUMO netconvert 1.26.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <node-files value="nodes.nod.xml"/>
+        <edge-files value="edges.edg.xml"/>
+    </input>
+
+    <output>
+        <output-file value="testdetour.net.xml"/>
+    </output>
+
+</netconvertConfiguration>
+-->
+
+<net version="1.20" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,0.00" convBoundary="0.00,0.00,1000.00,100.00" origBoundary="0.00,0.00,1000.00,100.00" projParameter="!"/>
+
+    <edge id=":node_merge_0" function="internal">
+        <lane id=":node_merge_0_0" index="0" speed="29.06" length="7.84" shape="743.82,-8.00 751.66,-8.00"/>
+        <lane id=":node_merge_0_1" index="1" speed="29.06" length="7.84" shape="743.82,-4.80 751.66,-4.80"/>
+        <lane id=":node_merge_0_2" index="2" speed="29.06" length="7.84" shape="743.82,-1.60 751.66,-1.60"/>
+    </edge>
+    <edge id=":node_merge_3" function="internal">
+        <lane id=":node_merge_3_0" index="0" speed="10.50" length="10.08" shape="745.43,2.30 747.15,-0.22 748.03,-2.50 749.16,-4.16 751.66,-4.80"/>
+        <lane id=":node_merge_3_1" index="1" speed="9.23" length="7.70" shape="745.43,2.30 746.99,0.60 748.14,-0.62 749.50,-1.36 751.66,-1.60"/>
+    </edge>
+    <edge id=":node_split_0" function="internal">
+        <lane id=":node_split_0_0" index="0" speed="29.06" length="7.84" shape="248.34,-8.00 256.18,-8.00"/>
+        <lane id=":node_split_0_1" index="1" speed="29.06" length="7.84" shape="248.34,-4.80 256.18,-4.80"/>
+        <lane id=":node_split_0_2" index="2" speed="29.06" length="7.84" shape="248.34,-1.60 256.18,-1.60"/>
+    </edge>
+    <edge id=":node_split_3" function="internal">
+        <lane id=":node_split_3_0" index="0" speed="9.11" length="7.49" shape="248.34,-1.60 249.60,-1.36 251.06,-0.62 252.71,0.60 254.57,2.30"/>
+    </edge>
+
+    <edge id="highway_end" from="node_merge" to="node_end" priority="-1">
+        <lane id="highway_end_0" index="0" speed="29.06" length="248.34" acceleration="1" shape="751.66,-8.00 1000.00,-8.00"/>
+        <lane id="highway_end_1" index="1" speed="29.06" length="248.34" acceleration="1" shape="751.66,-4.80 1000.00,-4.80"/>
+        <lane id="highway_end_2" index="2" speed="29.06" length="248.34" shape="751.66,-1.60 1000.00,-1.60"/>
+    </edge>
+    <edge id="highway_middle" from="node_split" to="node_merge" priority="-1">
+        <lane id="highway_middle_0" index="0" speed="29.06" length="487.64" shape="256.18,-8.00 743.82,-8.00"/>
+        <lane id="highway_middle_1" index="1" speed="29.06" length="487.64" shape="256.18,-4.80 743.82,-4.80"/>
+        <lane id="highway_middle_2" index="2" speed="29.06" length="487.64" shape="256.18,-1.60 743.82,-1.60"/>
+    </edge>
+    <edge id="highway_start" from="node_start" to="node_split" priority="-1">
+        <lane id="highway_start_0" index="0" speed="29.06" length="248.34" shape="0.00,-8.00 248.34,-8.00"/>
+        <lane id="highway_start_1" index="1" speed="29.06" length="248.34" shape="0.00,-4.80 248.34,-4.80"/>
+        <lane id="highway_start_2" index="2" speed="29.06" length="248.34" shape="0.00,-1.60 248.34,-1.60"/>
+    </edge>
+    <edge id="side_road" from="node_split" to="node_merge" priority="-1" shape="250.00,0.00 350.00,100.00 650.00,100.00 750.00,0.00">
+        <lane id="side_road_0" index="0" speed="20.00" length="570.48" shape="254.57,2.30 350.66,98.40 649.34,98.40 745.43,2.30"/>
+    </edge>
+
+    <junction id="node_end" type="dead_end" x="1000.00" y="0.00" incLanes="highway_end_0 highway_end_1 highway_end_2" intLanes="" shape="1000.00,-9.60 1000.00,0.00"/>
+    <junction id="node_merge" type="priority" x="750.00" y="0.00" incLanes="highway_middle_0 highway_middle_1 highway_middle_2 side_road_0" intLanes=":node_merge_0_0 :node_merge_0_1 :node_merge_0_2 :node_merge_3_0 :node_merge_3_1" shape="751.66,0.00 751.66,-9.60 743.82,-9.60 743.82,0.00 744.61,0.13 744.77,0.29 744.77,0.52 744.61,0.81 744.30,1.17 746.57,3.43 748.17,1.58 748.77,0.90 749.45,0.41 750.36,0.10">
+        <request index="0" response="00000" foes="11000" cont="0"/>
+        <request index="1" response="00000" foes="11000" cont="0"/>
+        <request index="2" response="00000" foes="11000" cont="0"/>
+        <request index="3" response="00111" foes="00111" cont="0"/>
+        <request index="4" response="00111" foes="00111" cont="0"/>
+    </junction>
+    <junction id="node_split" type="priority" x="250.00" y="0.00" incLanes="highway_start_0 highway_start_1 highway_start_2" intLanes=":node_split_0_0 :node_split_0_1 :node_split_0_2 :node_split_3_0" shape="253.43,3.43 255.70,1.17 255.23,0.52 255.23,0.29 255.39,0.13 255.71,0.03 256.18,0.00 256.18,-9.60 248.34,-9.60 248.34,0.00 249.65,0.38 250.44,0.86 251.34,1.53 252.34,2.38">
+        <request index="0" response="0000" foes="0000" cont="0"/>
+        <request index="1" response="0000" foes="0000" cont="0"/>
+        <request index="2" response="0000" foes="0000" cont="0"/>
+        <request index="3" response="0000" foes="0000" cont="0"/>
+    </junction>
+    <junction id="node_start" type="dead_end" x="0.00" y="0.00" incLanes="" intLanes="" shape="0.00,0.00 0.00,-9.60"/>
+
+    <connection from="highway_middle" to="highway_end" fromLane="0" toLane="0" via=":node_merge_0_0" dir="s" state="M"/>
+    <connection from="highway_middle" to="highway_end" fromLane="1" toLane="1" via=":node_merge_0_1" dir="s" state="M"/>
+    <connection from="highway_middle" to="highway_end" fromLane="2" toLane="2" via=":node_merge_0_2" dir="s" state="M"/>
+    <connection from="highway_start" to="highway_middle" fromLane="0" toLane="0" via=":node_split_0_0" dir="s" state="M"/>
+    <connection from="highway_start" to="highway_middle" fromLane="1" toLane="1" via=":node_split_0_1" dir="s" state="M"/>
+    <connection from="highway_start" to="highway_middle" fromLane="2" toLane="2" via=":node_split_0_2" dir="s" state="M"/>
+    <connection from="highway_start" to="side_road" fromLane="2" toLane="0" via=":node_split_3_0" dir="l" state="M"/>
+    <connection from="side_road" to="highway_end" fromLane="0" toLane="1" via=":node_merge_3_0" dir="l" state="m"/>
+    <connection from="side_road" to="highway_end" fromLane="0" toLane="2" via=":node_merge_3_1" dir="l" state="m"/>
+
+    <connection from=":node_merge_0" to="highway_end" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":node_merge_0" to="highway_end" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":node_merge_0" to="highway_end" fromLane="2" toLane="2" dir="s" state="M"/>
+    <connection from=":node_merge_3" to="highway_end" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":node_merge_3" to="highway_end" fromLane="1" toLane="2" dir="l" state="M"/>
+    <connection from=":node_split_0" to="highway_middle" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":node_split_0" to="highway_middle" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":node_split_0" to="highway_middle" fromLane="2" toLane="2" dir="s" state="M"/>
+    <connection from=":node_split_3" to="side_road" fromLane="0" toLane="0" dir="l" state="M"/>
+
+</net>

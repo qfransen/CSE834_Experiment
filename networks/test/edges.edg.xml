@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edges xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/edges_file.xsd">
+    <edge id="highway_start" from="node_start" to="node_split" speed="29.06" numLanes="3"/>
+    <edge id="highway_middle" from="node_split" to="node_merge" speed="29.06" numLanes="3"/>
+    <edge id="highway_end" from="node_merge" to="node_end" speed="29.06" numLanes="3"/>
+
+    <edge id="side_road" from="node_split" to="node_merge" speed="20.00" numLanes="1" shape="250.0,0.0 350.0,100.0 650.0,100.0 750.0,0.0"/>
+</edges>
