@@ -15,7 +15,7 @@ else:
 
 def run_test():
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
-    sumo_binary = "sumo-gui"
+    sumo_binary = "sumo"
     # TODO: look at xsi:noNamespaceSchemaLocation in the .net.xml and .rou.xml files
     sumo_cmd = [sumo_binary, "-c", "networks/test/test.sumocfg"]
 
@@ -66,6 +66,7 @@ def run_test():
 
     summary = processor.get_total_summary(exclude_vehicles=[target_vehicle])
     processor.print_total_summary(summary)
+    processor.save_experiment_data('test_output.csv')
 
     traci.close()
     print("Simulation complete and closed successfully.")

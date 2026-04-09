@@ -10,6 +10,6 @@
 
     <vehicle id="target_car" type="crash_car" route="route_main" depart="0" departLane="1"/>
 
-    <flow id="background_traffic" type="basic_car" route="route_main" begin="2" end="500" probability="0.9"/>
-    <flow id="cav_traffic" type="cav_car" begin="2" end="500" probability="0.7" from="highway_start" to="highway_end"/>
+    <flow id="background_traffic" type="basic_car" route="route_main" begin="2" end="500" probability="0.95"/>
+    <flow id="cav_traffic" type="cav_car" begin="2" end="500" probability="0.99" from="highway_start" to="highway_end"/>
 </routes>
