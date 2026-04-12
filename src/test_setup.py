@@ -15,7 +15,7 @@ else:
 
 def run_test():
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
-    sumo_binary = "sumo"
+    sumo_binary = "sumo-gui"
     # TODO: look at xsi:noNamespaceSchemaLocation in the .net.xml and .rou.xml files
     sumo_cmd = [sumo_binary, "-c", "networks/test/test.sumocfg"]
 
@@ -45,6 +45,18 @@ def run_test():
             # Use setSpeedMode to override any SUMO checks
             traci.vehicle.setSpeedMode(target_vehicle, 0)
             traci.vehicle.setSpeed(target_vehicle, 0)
+
+            for lane_idx in range(2):
+                crash_veh_id = f"crashed_car_{lane_idx}"
+
+                # Add the vehicle directly onto the edge and lane
+                traci.vehicle.add(crash_veh_id, routeID="route_main", typeID="cav_car")
+                traci.vehicle.moveTo(crash_veh_id, f'highway_middle_{lane_idx}', pos=150.0)
+
+                # Freeze it in place
+                traci.vehicle.setSpeedMode(crash_veh_id, 0)
+                traci.vehicle.setSpeed(crash_veh_id, 0)
+                traci.vehicle.setColor(crash_veh_id, (255, 0, 0))
 
             print('Updating edge weights and rerouting CAVs')
             # artificially increase travel time in middle section to make it look slow

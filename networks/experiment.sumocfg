@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/sumoConfiguration.xsd">
     <input>
-        <net-file value="testdetour.net.xml"/>
-        <route-files value="testdetour.rou.xml"/>
+        <!-- TODO: create these files -->
+        <net-file value="experiment.net.xml"/>
+        <route-files value="experiment.rou.xml"/>
     </input>
     <time>
+        <!-- 10 minute warmup, 30 minutes after crash -->
         <begin value="0"/>
-        <end value="10000"/>
+        <end value="2400"/>
     </time>
     <processing>
         <time-to-teleport value="-1"/>
