@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-04-12T03:39:29.066087-05:00 by Eclipse SUMO netedit 1.26.0
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- VTypes -->
+    <vType id="test_connected_type">
+        <param key="device.rerouting.period" value="10"/>
+    </vType>
+
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+    <flow id="f_0" begin="0.00" end="3600.00" perHour="1800.00" from="49287172" to="759480768"/>
+    <flow id="f_1" type="test_connected_type" begin="0.00" end="3600.00" perHour="1800.00" color="green" from="49287172" to="759480768"/>
+</routes>
