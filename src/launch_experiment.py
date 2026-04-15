@@ -28,12 +28,13 @@ def main(connectivity):
     # "--tripinfo-output", "trip_info.xml"
 
     print(f"Starting SUMO with connectivity: {connectivity*100}%")
-    traci.start(sumo_cmd)
     processor = DataProcessor(connectivity=connectivity)  # our data processor
     processor.initialize_connectivity()
+    # Start SUMO after XML is setup correctly
+    traci.start(sumo_cmd)
 
     step = 0
-    while step < 100:
+    while step < 2400:
         traci.simulationStep()
         processor.update_delays()
 

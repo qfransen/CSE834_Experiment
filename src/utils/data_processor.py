@@ -192,7 +192,7 @@ class DataProcessor:
 
         output_df.loc[len(output_df)] = new_row
         output_df.to_csv(filename, index=False)
-        print(f"Experiment data saved to {filename}")
+        print(f"\nExperiment data saved to {filename}\n")
 
     def initialize_connectivity(self):
         """
@@ -205,13 +205,25 @@ class DataProcessor:
         tree = ET.parse("../networks/ORIGINAL_traffic.flow.xml")
         root = tree.getroot()
 
+        # Keep track of flows that drop to a 0 rate so we can remove them
+        flows_to_remove = []
+
         for flow in root.findall('flow'):
             if flow.get('type') == "standard_veh":
                 new_rate = float(flow.get('vehsPerHour')) * (1 - self.connectivity)
-                flow.set('vehsPerHour', str(new_rate))
+                if new_rate <= 0:
+                    flows_to_remove.append(flow)
+                else:
+                    flow.set('vehsPerHour', str(new_rate))
             elif flow.get('type') == "connected_veh":
                 new_rate = float(flow.get('vehsPerHour')) * self.connectivity
-                flow.set('vehsPerHour', str(new_rate))
+                if new_rate <= 0:
+                    flows_to_remove.append(flow)
+                else:
+                    flow.set('vehsPerHour', str(new_rate))
+
+        for flow in flows_to_remove:
+            root.remove(flow)
 
         tree.write("../networks/traffic.flow.xml")
         return
