@@ -1,0 +1,19 @@
+<configuration>
+    <input>
+        <net-file value="final_system.net.xml"/>
+        <route-files value="traffic.flow.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="3600"/>
+    </time>
+    <gui_only>
+        <start value="true"/>
+        <quit-on-end value="false"/>
+    </gui_only>
+    <processing>
+        <time-to-teleport value="-1"/>
+        
+        <max-depart-delay value="360"/>
+    </processing>
+</configuration>
