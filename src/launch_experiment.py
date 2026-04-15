@@ -21,7 +21,7 @@ def check_environment():
 def main(connectivity):
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
     sumo_binary = "sumo-gui"
-    sumo_cmd = [sumo_binary, "-c", "networks/experiment/experiment.sumocfg"]
+    sumo_cmd = [sumo_binary, "-c", "networks/run.sumocfg"]
 
     print(f"Starting SUMO with connectivity: {connectivity*100}%")
     traci.start(sumo_cmd)
@@ -35,18 +35,34 @@ def main(connectivity):
         # Start the crash at 10 minutes (600 seconds)
         if step == 600:
             print(f'Starting crash at step {step}')
+
+            # The target edge on the Northbound I-405
+            crash_edge = "124550370"
+            # Create a short dummy route for the crashed vehicles
+            # (Required because traci.vehicle.add needs a valid routeID)
+            traci.route.add("crash_route", [crash_edge])
+
             # Take up 3 lanes on the northbound highway
             for lane_idx in range(3):
                 crash_veh_id = f"crashed_car_{lane_idx}"
+                target_lane = f"{crash_edge}_{lane_idx}"
 
-                # # Add the vehicle directly onto the edge and lane
-                # traci.vehicle.add(crash_veh_id, routeID="route_main", typeID="cav_car")
-                # traci.vehicle.moveTo(crash_veh_id, f'highway_middle_{lane_idx}', pos=150.0)
-                #
-                # # Freeze it in place
-                # traci.vehicle.setSpeedMode(crash_veh_id, 0)
-                # traci.vehicle.setSpeed(crash_veh_id, 0)
-                # traci.vehicle.setColor(crash_veh_id, (255, 0, 0))
+                # Add the vehicle directly onto the edge and lane
+                traci.vehicle.add(crash_veh_id, routeID="crash_route", typeID="standard_veh")
+                traci.vehicle.moveTo(crash_veh_id, f'target_lane', pos=150.0)
+
+                # Freeze it in place
+                traci.vehicle.setSpeedMode(crash_veh_id, 0)
+                traci.vehicle.setSpeed(crash_veh_id, 0)
+                traci.vehicle.setColor(crash_veh_id, (255, 0, 0))
+
+            if step % 100 == 0:
+                active_vehicles = traci.vehicle.getIDList()
+                summary = processor.get_current_summary(
+                    active_vehicles,
+                    exclude_vehicles=None
+                )
+                processor.print_step_summary(summary, step)
 
 if __name__ == "__main__":
     check_environment()
