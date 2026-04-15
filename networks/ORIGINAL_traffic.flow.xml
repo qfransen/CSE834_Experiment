@@ -2,7 +2,7 @@
     <!-- VTypes -->
     <vType id="standard_veh" carFollowModel="IDM" accel="2.0" decel="4.0" tau="1.4" minGap="2.5" maxSpeed="60" sigma="0.5" color="white"/>
     <vType id="connected_veh" carFollowModel="IDM" accel="2.0" decel="4.0" tau="1.4" minGap="2.5" maxSpeed="60" sigma="0.1" color="white">
-        <param key="device.rerouting.period" value="5"/>
+        <param key="device.rerouting.period" value="10"/>
     </vType>
 
     <!-- flows -->
