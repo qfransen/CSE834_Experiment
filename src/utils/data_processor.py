@@ -3,6 +3,7 @@ import datetime
 import traci
 import os
 import pandas as pd
+import xml.etree.ElementTree as ET
 
 class DataProcessor:
     def __init__(self, connectivity: float = 0.0):
@@ -192,3 +193,25 @@ class DataProcessor:
         output_df.loc[len(output_df)] = new_row
         output_df.to_csv(filename, index=False)
         print(f"Experiment data saved to {filename}")
+
+    def initialize_connectivity(self):
+        """
+        Sets the connectivity percentage of vehicles using the flow xml file
+        :return: None
+        """
+        #assert that the connectivity is valid
+        assert(1 >= self.connectivity >= 0)
+
+        tree = ET.parse("../networks/traffic.flow.xml")
+        root = tree.getroot()
+
+        for flow in root.findall('flow'):
+            if flow.get('type') == "standard_veh":
+                new_rate = float(flow.get('vehsPerHour')) * (1 - self.connectivity)
+                flow.set('vehsPerHour', str(new_rate))
+            elif flow.get('type') == "connected_veh":
+                new_rate = float(flow.get('vehsPerHour')) * self.connectivity
+                flow.set('vehsPerHour', str(new_rate))
+
+        tree.write("../networks/traffic.flow.xml")
+        return
