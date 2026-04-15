@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+<configuration>
     <input>
-        <!-- TODO: create these files -->
-        <net-file value="experiment.net.xml"/>
-        <route-files value="experiment.rou.xml"/>
+        <net-file value="final_system.net.xml"/>
+        <route-files value="traffic.flow.xml"/>
     </input>
     <time>
         <!-- 10 minute warmup, 30 minutes after crash -->
         <begin value="0"/>
         <end value="2400"/>
     </time>
+    <gui_only>
+        <start value="true"/>
+        <quit-on-end value="false"/>
+    </gui_only>
     <processing>
         <time-to-teleport value="-1"/>
+        
+        <max-depart-delay value="360"/>
     </processing>
 </configuration>
