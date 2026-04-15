@@ -22,7 +22,7 @@ def check_environment():
 
 def main(connectivity):
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
-    sumo_binary = "sumo"
+    sumo_binary = "sumo-gui"
     sumo_cmd = [sumo_binary, "-c", "networks/run.sumocfg"]
 
     print(f"Starting SUMO with connectivity: {connectivity*100}%")
@@ -44,20 +44,30 @@ def main(connectivity):
             # (Required because traci.vehicle.add needs a valid routeID)
             traci.route.add("crash_route", [crash_edge])
 
+            total_lanes = traci.edge.getLaneNumber(crash_edge)
+            crash_lane_indices = [0, 1, 2]  # Lanes to block (0 is the rightmost lane)
             # Take up 3 lanes on the northbound highway
-            for lane_idx in range(3):
-                crash_veh_id = f"crashed_car_{lane_idx}"
+            for lane_idx in range(total_lanes):
                 target_lane = f"{crash_edge}_{lane_idx}"
+                if lane_idx in crash_lane_indices:
+                    crash_veh_id = f"crashed_car_{lane_idx}"
 
-                # Add the vehicle directly onto the edge and lane
-                traci.vehicle.add(crash_veh_id, routeID="crash_route", typeID="standard_veh")
-                traci.vehicle.moveTo(crash_veh_id, f'{target_lane}', pos=150.0)
+                    # Add the vehicle directly onto the edge and lane
+                    traci.vehicle.add(crash_veh_id, routeID="crash_route", typeID="standard_veh")
+                    traci.vehicle.moveTo(crash_veh_id, f'{target_lane}', pos=150.0)
 
-                # Freeze it in place
-                traci.vehicle.setSpeedMode(crash_veh_id, 0)
-                traci.vehicle.setSpeed(crash_veh_id, 0)
-                traci.vehicle.setColor(crash_veh_id, (255, 0, 0))
+                    # Freeze it in place
+                    traci.vehicle.setSpeedMode(crash_veh_id, 0)
+                    traci.vehicle.setSpeed(crash_veh_id, 0)
+                    traci.vehicle.setLaneChangeMode(crash_veh_id, 0)
+                    traci.vehicle.setColor(crash_veh_id, (0, 0, 255))
 
+                    # Close the lane to traffic
+                    # Prevents vehicles that don't have class "authority" from entering the lane, effectively blocking it
+                    traci.lane.setAllowed(target_lane, ["authority"])
+                else:
+                    # Slow down open lanes to allow for merging
+                    traci.lane.setMaxSpeed(target_lane, 15.0)
         if step % 100 == 0:
             active_vehicles = traci.vehicle.getIDList()
             summary = processor.get_current_summary(
