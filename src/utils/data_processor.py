@@ -202,7 +202,7 @@ class DataProcessor:
         #assert that the connectivity is valid
         assert(1 >= self.connectivity >= 0)
 
-        tree = ET.parse("../networks/traffic.flow.xml")
+        tree = ET.parse("../networks/ORIGINAL_traffic.flow.xml")
         root = tree.getroot()
 
         for flow in root.findall('flow'):
