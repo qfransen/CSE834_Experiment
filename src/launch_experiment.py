@@ -22,12 +22,13 @@ def check_environment():
 
 def main(connectivity):
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
-    sumo_binary = "sumo-gui"
-    sumo_cmd = [sumo_binary, "-c", "networks/run.sumocfg"]
+    sumo_binary = "sumo"
+    sumo_cmd = [sumo_binary, "-c", "../networks/run.sumocfg"]
 
     print(f"Starting SUMO with connectivity: {connectivity*100}%")
     traci.start(sumo_cmd)
     processor = DataProcessor(connectivity=connectivity)  # our data processor
+    processor.initialize_connectivity()
 
     step = 0
     while step < 2400:
