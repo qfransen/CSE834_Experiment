@@ -5,7 +5,8 @@ import os
 import pandas as pd
 
 class DataProcessor:
-    def __init__(self):
+    def __init__(self, connectivity: float = 0.0):
+        self.connectivity = connectivity
         # Dictionary to track {veh_id: {"entry_time": float, "free_flow_time": float}}
         self.active_trips = {}
         # List to store the calculated delay (in seconds) of each vehicle that has finished its route
@@ -98,6 +99,7 @@ class DataProcessor:
         :return: None
         """
         print("\nTotal Summary:")
+        print(f"Vehicle connectivity: {self.connectivity*100:.0f}%")
         print(f"Completed trips: {summary['completed_trips']}")
         print(f"Ongoing trips: {summary['ongoing_trips']}")
         if summary['completed_trips'] > 0:
@@ -184,7 +186,7 @@ class DataProcessor:
             "average_delay": summary["average_delay"],
             "completed_trips": summary["completed_trips"],
             "ongoing_trips": summary["ongoing_trips"],
-            "cav_percentage": 0.123  # TODO: add this in when we have CAV tracking implemented
+            "cav_percentage": self.connectivity
         }
 
         output_df.loc[len(output_df)] = new_row

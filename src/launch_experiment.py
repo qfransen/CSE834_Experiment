@@ -17,15 +17,17 @@ def check_environment():
     else:
         sys.exit("Please declare environment variable 'SUMO_HOME'")
 
+    print("Environment check passed: SUMO_HOME found.")
+
 
 def main(connectivity):
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
-    sumo_binary = "sumo-gui"
+    sumo_binary = "sumo"
     sumo_cmd = [sumo_binary, "-c", "networks/run.sumocfg"]
 
     print(f"Starting SUMO with connectivity: {connectivity*100}%")
     traci.start(sumo_cmd)
-    processor = DataProcessor()  # our data processor
+    processor = DataProcessor(connectivity=connectivity)  # our data processor
 
     step = 0
     while step < 2400:
@@ -49,20 +51,30 @@ def main(connectivity):
 
                 # Add the vehicle directly onto the edge and lane
                 traci.vehicle.add(crash_veh_id, routeID="crash_route", typeID="standard_veh")
-                traci.vehicle.moveTo(crash_veh_id, f'target_lane', pos=150.0)
+                traci.vehicle.moveTo(crash_veh_id, f'{target_lane}', pos=150.0)
 
                 # Freeze it in place
                 traci.vehicle.setSpeedMode(crash_veh_id, 0)
                 traci.vehicle.setSpeed(crash_veh_id, 0)
                 traci.vehicle.setColor(crash_veh_id, (255, 0, 0))
 
-            if step % 100 == 0:
-                active_vehicles = traci.vehicle.getIDList()
-                summary = processor.get_current_summary(
-                    active_vehicles,
-                    exclude_vehicles=None
-                )
-                processor.print_step_summary(summary, step)
+        if step % 100 == 0:
+            active_vehicles = traci.vehicle.getIDList()
+            summary = processor.get_current_summary(
+                active_vehicles,
+                exclude_vehicles=None
+            )
+            processor.print_step_summary(summary, step)
+
+        step += 1
+
+    # Simulation is done, print final summary and save data
+    summary = processor.get_total_summary(exclude_vehicles=None)
+    processor.print_total_summary(summary)
+    processor.save_experiment_data('experiment_output.csv')
+
+    traci.close()
+    print("Simulation complete and closed successfully.")
 
 if __name__ == "__main__":
     check_environment()
