@@ -23,9 +23,9 @@ def check_environment():
 def main(connectivity):
     # Use 'sumo-gui' to see the visualization, or 'sumo' for headless execution
     sumo_binary = "sumo"
-    sumo_cmd = [sumo_binary, "-c", "../networks/run.sumocfg","--statistic-output", "statistic_output.xml", "--duration-log.statistics", "--tripinfo-output.write-unfinished"]
+    sumo_cmd = [sumo_binary, "-c", "../networks/run.sumocfg","--statistic-output", "statistic_output.xml", "--duration-log.statistics", "--tripinfo-output.write-unfinished","--random"]
     # other options that give more info if needed
-    # "--tripinfo-output", "trip_info.xml"
+    # "--tripinfo-output", "trip_info.xml","--random"
 
     print(f"Starting SUMO with connectivity: {connectivity*100}%")
     processor = DataProcessor(connectivity=connectivity)  # our data processor
