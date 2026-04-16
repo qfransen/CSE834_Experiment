@@ -82,13 +82,15 @@ def main(connectivity):
 
         step += 1
 
+    print()
+    traci.close()
+    print("\nSimulation complete and closed successfully.")
+
     # Simulation is done, print final summary and save data
     summary = processor.get_total_summary(exclude_vehicles=None)
     processor.print_total_summary(summary)
     processor.save_experiment_data('experiment_output.csv')
 
-    traci.close()
-    print("Simulation complete and closed successfully.")
 
 if __name__ == "__main__":
     check_environment()

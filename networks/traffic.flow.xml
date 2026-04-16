@@ -7,36 +7,36 @@
 
     
     
-    <flow id="fwy_south" begin="0" end="3600" vehsPerHour="4500.0" type="standard_veh" from="49287172" to="759480768" departLane="best" departSpeed="max" departPos="random" />
+    <flow id="fwy_south" begin="0" end="3600" vehsPerHour="3000.0" type="standard_veh" from="49287172" to="759480768" departLane="best" departSpeed="max" departPos="random" />
 
-    <flow id="fwy_north" begin="0" end="3600" vehsPerHour="4500.0" type="standard_veh" from="49436951" to="769195692" departLane="best" departSpeed="max" departPos="random" />
-
-
-    <flow id="sep_south" begin="0" end="3600" vehsPerHour="1080.0" type="standard_veh" from="149003093#0" to="382452795#3" departLane="best" departPos="random" />
-    <flow id="sep_north" begin="0" end="3600" vehsPerHour="1080.0" type="standard_veh" from="-382452795#3" to="-149003093#0" departLane="best" departPos="random" />
-
-    <flow id="saw_south" begin="0" end="3600" vehsPerHour="540.0" type="standard_veh" from="159606597#0" to="-398372838#6" departLane="best" departPos="random" />
-    <flow id="saw_north" begin="0" end="3600" vehsPerHour="540.0" type="standard_veh" from="398372838#6" to="-159606597#0" departLane="best" departPos="random" />
+    <flow id="fwy_north" begin="0" end="3600" vehsPerHour="3000.0" type="standard_veh" from="49436951" to="769195692" departLane="best" departSpeed="max" departPos="random" />
 
 
-    <flow id="side_to_hwy_S" begin="0" end="3600" vehsPerHour="270.0" type="standard_veh" from="384187981" to="759480768" departPos="random" />
+    <flow id="sep_south" begin="0" end="3600" vehsPerHour="720.0" type="standard_veh" from="149003093#0" to="382452795#3" departLane="best" departPos="random" />
+    <flow id="sep_north" begin="0" end="3600" vehsPerHour="720.0" type="standard_veh" from="-382452795#3" to="-149003093#0" departLane="best" departPos="random" />
 
-    <flow id="side_to_hwy_N" begin="0" end="3600" vehsPerHour="270.0" type="standard_veh" from="719674433" to="769195692" departPos="random" />
+    <flow id="saw_south" begin="0" end="3600" vehsPerHour="360.0" type="standard_veh" from="159606597#0" to="-398372838#6" departLane="best" departPos="random" />
+    <flow id="saw_north" begin="0" end="3600" vehsPerHour="360.0" type="standard_veh" from="398372838#6" to="-159606597#0" departLane="best" departPos="random" />
+
+
+    <flow id="side_to_hwy_S" begin="0" end="3600" vehsPerHour="180.0" type="standard_veh" from="384187981" to="759480768" departPos="random" />
+
+    <flow id="side_to_hwy_N" begin="0" end="3600" vehsPerHour="180.0" type="standard_veh" from="719674433" to="769195692" departPos="random" />
 
     
-    <flow id="fwy_south_con" begin="0" end="3600" vehsPerHour="500.0" type="connected_veh" from="49287172" to="759480768" departLane="best" departSpeed="max" departPos="random" />
+    <flow id="fwy_south_con" begin="0" end="3600" vehsPerHour="2000.0" type="connected_veh" from="49287172" to="759480768" departLane="best" departSpeed="max" departPos="random" />
 
-    <flow id="fwy_north_con" begin="0" end="3600" vehsPerHour="500.0" type="connected_veh" from="49436951" to="769195692" departLane="best" departSpeed="max" departPos="random" />
-
-
-    <flow id="sep_south_con" begin="0" end="3600" vehsPerHour="120.0" type="connected_veh" from="149003093#0" to="382452795#3" departLane="best" departPos="random" />
-    <flow id="sep_north_con" begin="0" end="3600" vehsPerHour="120.0" type="connected_veh" from="-382452795#3" to="-149003093#0" departLane="best" departPos="random" />
-
-    <flow id="saw_south_con" begin="0" end="3600" vehsPerHour="60.0" type="connected_veh" from="159606597#0" to="-398372838#6" departLane="best" departPos="random" />
-    <flow id="saw_north_con" begin="0" end="3600" vehsPerHour="60.0" type="connected_veh" from="398372838#6" to="-159606597#0" departLane="best" departPos="random" />
+    <flow id="fwy_north_con" begin="0" end="3600" vehsPerHour="2000.0" type="connected_veh" from="49436951" to="769195692" departLane="best" departSpeed="max" departPos="random" />
 
 
-    <flow id="side_to_hwy_S_con" begin="0" end="3600" vehsPerHour="30.0" type="connected_veh" from="384187981" to="759480768" departPos="random" />
+    <flow id="sep_south_con" begin="0" end="3600" vehsPerHour="480.0" type="connected_veh" from="149003093#0" to="382452795#3" departLane="best" departPos="random" />
+    <flow id="sep_north_con" begin="0" end="3600" vehsPerHour="480.0" type="connected_veh" from="-382452795#3" to="-149003093#0" departLane="best" departPos="random" />
 
-    <flow id="side_to_hwy_N_con" begin="0" end="3600" vehsPerHour="30.0" type="connected_veh" from="719674433" to="769195692" departPos="random" />
+    <flow id="saw_south_con" begin="0" end="3600" vehsPerHour="240.0" type="connected_veh" from="159606597#0" to="-398372838#6" departLane="best" departPos="random" />
+    <flow id="saw_north_con" begin="0" end="3600" vehsPerHour="240.0" type="connected_veh" from="398372838#6" to="-159606597#0" departLane="best" departPos="random" />
+
+
+    <flow id="side_to_hwy_S_con" begin="0" end="3600" vehsPerHour="120.0" type="connected_veh" from="384187981" to="759480768" departPos="random" />
+
+    <flow id="side_to_hwy_N_con" begin="0" end="3600" vehsPerHour="120.0" type="connected_veh" from="719674433" to="769195692" departPos="random" />
 </routes>

@@ -178,7 +178,18 @@ class DataProcessor:
             output_df = pd.read_csv(filename)
         else:
             # If not, create a new dataframe with the appropriate columns
-            output_df = pd.DataFrame(columns=["experiment_id", "average_delay", "completed_trips", "ongoing_trips", "cav_percentage"])
+            output_df = pd.DataFrame(
+                columns=[
+                    "experiment_id", "average_delay", "completed_trips", "ongoing_trips", "cav_percentage",
+                    # the following columns are from the SUMO statistics_output xml file:
+                    "count","routeLength","speed","duration","waitingTime","timeLoss","departDelay",
+                    "departDelayWaiting","totalTravelTime","totalDepartDelay",
+                    "collisions","emergencyStops","emergencyBraking","total teleports"
+                ])
+
+        # access the statistics xml file created by sumo
+        tree = ET.parse("./statistic_output.xml")
+        root = tree.getroot()
 
         # Add the new data as a new row in the dataframe
         summary = self.get_total_summary()
@@ -187,8 +198,9 @@ class DataProcessor:
             "average_delay": summary["average_delay"],
             "completed_trips": summary["completed_trips"],
             "ongoing_trips": summary["ongoing_trips"],
-            "cav_percentage": self.connectivity
-        }
+            "cav_percentage": self.connectivity,
+            "total teleports": root.find("teleports").attrib["total"]
+        } | root.find("vehicleTripStatistics").attrib | root.find("safety").attrib  # data from the SUMO statistics xml file
 
         output_df.loc[len(output_df)] = new_row
         output_df.to_csv(filename, index=False)
@@ -208,6 +220,7 @@ class DataProcessor:
         # Keep track of flows that drop to a 0 rate so we can remove them
         flows_to_remove = []
 
+        #iterate over all flows, and adjust their rates depending on their vehicle types and the desired connectivity level
         for flow in root.findall('flow'):
             if flow.get('type') == "standard_veh":
                 new_rate = float(flow.get('vehsPerHour')) * (1 - self.connectivity)
