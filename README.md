@@ -1,5 +1,8 @@
 # SUMO Traffic Simulation Repository
 
+## Our experiment data
+The data we used in our analysis in available in `data.csv`.
+
 ## Run a simulation
 Navigate to the `src/` directory and execute the main script:
 
