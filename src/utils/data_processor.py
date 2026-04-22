@@ -180,7 +180,7 @@ class DataProcessor:
             # If not, create a new dataframe with the appropriate columns
             output_df = pd.DataFrame(
                 columns=[
-                    "experiment_id", "average_delay", "completed_trips", "ongoing_trips", "cav_percentage",
+                    "experiment_id", "cav_percentage", "average_delay", "completed_trips", "ongoing_trips",
                     # the following columns are from the SUMO statistics_output xml file:
                     "count","routeLength","speed","duration","waitingTime","timeLoss","departDelay",
                     "departDelayWaiting","totalTravelTime","totalDepartDelay",

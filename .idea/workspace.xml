@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3f3d7d8-cfa2-41b3-a499-f77dd9a0be11" name="Changes" comment="" />
+    <list default="true" id="a3f3d7d8-cfa2-41b3-a499-f77dd9a0be11" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/experiment_output.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/experiment_output.csv" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,10 +14,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="McpProjectServerCommands">
-    <commands />
-    <urls />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -65,9 +63,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/launch_experiment.py" />
       <option name="PARAMETERS" value="-c .4" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -105,18 +101,14 @@
       <workItem from="1776254757889" duration="10000" />
       <workItem from="1776254790452" duration="10252000" />
       <workItem from="1776278845586" duration="4519000" />
-      <workItem from="1776298831027" duration="2454000" />
+      <workItem from="1776298831027" duration="13244000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Readme update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme update" />
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CSE834_Experiment$launch_experiment.coverage" NAME="launch_experiment Coverage Results" MODIFIED="1776301213523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/CSE834_Experiment$launch_experiment.coverage" NAME="launch_experiment Coverage Results" MODIFIED="1776345625886" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
