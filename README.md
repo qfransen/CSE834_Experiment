@@ -1,7 +1,18 @@
 # SUMO Traffic Simulation Repository
 
+This repository contains the simulation framework, source code, and dataset used to evaluate the 
+macroscopic impact of varying Connected Vehicle (CV) penetration rates under adverse capacity constraints.
+
 ## Our experiment data
 The data we used in our analysis in available in `data.csv`.
+
+## Prerequisites and Setup
+To run the simulations in this repository, you must have the 
+**Eclipse SUMO** (Simulation of Urban MObility) traffic simulator installed.
+
+1. Install SUMO: [official Eclipse SUMO website](https://eclipse.dev/sumo/)
+2. Set Environment Variable: You must set the `SUMO_HOME` environment variable on your system to point to the root directory of your SUMO installation
+3. Install Python dependencies: `pip install -r requirements.txt`
 
 ## Run a simulation
 Navigate to the `src/` directory and execute the main script:
