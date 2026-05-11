@@ -3,6 +3,8 @@
 This repository contains the simulation framework, source code, and dataset used to evaluate the 
 macroscopic impact of varying Connected Vehicle (CV) penetration rates under adverse capacity constraints.
 
+You can read our draft paper in the file: [CSE834GroupArticle.pdf](CSE834GroupArticle.pdf)
+
 ## Our experiment data
 The data we used in our analysis in available in `data.csv`.
 
